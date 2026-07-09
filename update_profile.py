@@ -13,8 +13,10 @@ from datetime import datetime, timezone
 USER = "narasimha4929"
 GITHUB_JOINED = datetime(2020, 10, 18, tzinfo=timezone.utc)
 
-# Fallbacks if the API is unreachable (refreshed each successful run)
-FALLBACK = {"repos": 19, "commits": 289, "stars": 1, "followers": 0}
+# Fallbacks if the API is unreachable (refreshed each successful run).
+# "commits" counts PUBLIC commits only — the Actions GITHUB_TOKEN cannot
+# see private-repo commits, so the label below says "Public Commits".
+FALLBACK = {"repos": 20, "commits": 54, "stars": 1, "followers": 0}
 
 C = {
     "bg": "#04060d",
@@ -123,7 +125,7 @@ def sep(title=""):
 
 def build_info(stats):
     gh = (
-        f"Repos: {stats['repos']} | Commits: {stats['commits']} "
+        f"Repos: {stats['repos']} | Public Commits: {stats['commits']} "
         f"| Stars: {stats['stars']} | Followers: {stats['followers']}"
     )
     return [
